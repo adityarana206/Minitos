@@ -1,7 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-const OnboardingScreen = () => {
+const OnboardingScreen = () => {  
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Image
@@ -14,8 +16,7 @@ const OnboardingScreen = () => {
         <Text style={styles.text}>Welcome</Text>
         <Text style={styles.text1}>to our store</Text>
         <Text style={styles.subtitle}>Get your groceries in as fast as one hour</Text>
-        
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={()=>navigation.navigate('Signinscreen')}>
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
