@@ -16,7 +16,7 @@ export default Header;
 
 const styles = StyleSheet.create({
     headerView: {
-        marginTop: Platform.OS === 'android' ? 50 : 0,
+        marginTop: Platform.OS === 'android' ? 50 : 1,
         width: width * 0.88,
         height: 57,
         justifyContent: 'center'
