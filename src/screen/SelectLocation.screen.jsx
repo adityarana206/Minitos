@@ -1,6 +1,7 @@
 import { Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Header from "../atoms/Header.common";
 const { width, height } = Dimensions.get('screen');
+
 const SelectLocation = ({ navigation }) =>     {
     return (
         <SafeAreaView style={styles.container}>
@@ -28,6 +29,7 @@ const SelectLocation = ({ navigation }) =>     {
                 <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
         </SafeAreaView>
+        
     )
 }
 export default SelectLocation;
