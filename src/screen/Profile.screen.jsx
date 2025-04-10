@@ -41,7 +41,6 @@ const ProfileScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.findProduct}>Find Product</Text>
-
         <View style={styles.searchContainer}>
           <MaterialIcons
             name="search"
@@ -60,6 +59,7 @@ const ProfileScreen = () => {
 
         <FlatList
           data={filteredList}
+          showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.name}
           numColumns={2}
           columnWrapperStyle={styles.row}

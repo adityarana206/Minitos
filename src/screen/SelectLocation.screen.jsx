@@ -25,7 +25,7 @@ const SelectLocation = ({ navigation }) =>     {
                 </View>
 
             </View>
-            <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => navigation.navigate('HomeScreen')}>
+            <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => navigation.navigate('TabNavigator')}>
                 <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
         </SafeAreaView>

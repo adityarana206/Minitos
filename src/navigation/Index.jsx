@@ -8,6 +8,7 @@ import Signinscreen from '../screen/Signin.screen';
 import OTPScreen from '../screen/Otp.screen';
 import SelectLocation from '../screen/SelectLocation.screen';
 import HomeScreen from '../screen/Home.screen';
+import TabNavigator from '../screen/TabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +27,7 @@ const AppNavigation = () => {
           <Stack.Screen name="Signinscreen" component={Signinscreen} options={screenOptions} />
           <Stack.Screen name="OTPScreen" component={OTPScreen} options={screenOptions} />
           <Stack.Screen name="SelectLocation" component={SelectLocation} options={screenOptions} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} options={screenOptions} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator} options={screenOptions} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
