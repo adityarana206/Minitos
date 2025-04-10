@@ -7,10 +7,10 @@ import CategoryWise from './src/screen/Product.screen';
 function App(): React.JSX.Element {
   
   return (
-    // <View style={styles.container}>
-    //     <AppNavigation />
-    // </View>
-    <CategoryWise/>
+    <View style={styles.container}>
+        <AppNavigation />
+    </View>
+   
   );
 }
 
