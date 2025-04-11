@@ -12,7 +12,7 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@react-native-masked-view/masked-view": "^0.3.2",
-    "@react-navigation/bottom-tabs": "^7.3.9",
+    "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/native": "^7.1.6",
     "@react-navigation/native-stack": "^7.3.8",
     "@react-navigation/stack": "^7.2.10",
@@ -22,6 +22,7 @@
     "react-native-gesture-handler": "^2.25.0",
     "react-native-safe-area-context": "^5.3.0",
     "react-native-screens": "^4.10.0",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^15.11.2",
     "react-native-vector-icons": "^10.2.0"
   },
