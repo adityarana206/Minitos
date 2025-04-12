@@ -7,9 +7,12 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FilterModal from './Filters.modal';
+const { width, height } = Dimensions.get('screen');
 
 const PRODUCT_LIST = [
   { name: 'Milk', image: 'https://via.placeholder.com/100x100.png?text=Milk' },
@@ -27,6 +30,8 @@ const PRODUCT_LIST = [
 
 const ProfileScreen = () => {
   const [search, setSearch] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [filteredList, setFilteredList] = useState(PRODUCT_LIST);
 
   const handleSearch = (text) => {
@@ -41,22 +46,30 @@ const ProfileScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.findProduct}>Find Product</Text>
-        <View style={styles.searchContainer}>
-          <MaterialIcons
-            name="search"
-            size={24}
-            color="#999"
-            style={styles.searchIcon}
-          />
-          <TextInput
-            placeholder="Search for products"
-            style={styles.searchInput}
-            placeholderTextColor="#999"
-            value={search}
-            onChangeText={handleSearch}
-          />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={[styles.searchContainer, isFocused && styles.focusedSearchContainer]}>
+            <MaterialIcons
+              name="search"
+              size={24}
+              color="#999"
+              style={styles.searchIcon}
+            />
+            <TextInput
+              placeholder="Search for products"
+              style={styles.searchInput}
+              placeholderTextColor="#999"
+              value={search}
+              onChangeText={handleSearch}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+            />
+          </View>
+          {isFocused &&
+            <TouchableOpacity onPress={() => setVisible(true)}>
+              <Text> Filtter </Text>
+            </TouchableOpacity>
+          }
         </View>
-
         <FlatList
           data={filteredList}
           showsVerticalScrollIndicator={false}
@@ -72,6 +85,7 @@ const ProfileScreen = () => {
           )}
         />
       </View>
+      <FilterModal modalVisible={visible} setModalVisible={setVisible} />
     </SafeAreaView>
   );
 };
@@ -101,8 +115,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 10,
+    width: width * 0.9,
     paddingHorizontal: 10,
     height: 50,
+  },
+  focusedSearchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f9f9f9',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    height: 50,
+    width: width * 0.8
   },
   searchIcon: {
     marginRight: 8,
@@ -110,7 +136,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 16,
-    color: '#333',
+    color: '#333'
   },
   list: {
     paddingVertical: 20,

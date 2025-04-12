@@ -5,7 +5,6 @@ const CartScreen = () => {
   return (
     <View>
      
-      
     </View>
   );
 };

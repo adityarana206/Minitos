@@ -27,6 +27,7 @@ const PRODUCT_LIST = [
 
 const Productfilter = () => {
   const [search, setSearch] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
   const [filteredList, setFilteredList] = useState(PRODUCT_LIST);
 
   const handleSearch = (text) => {
@@ -46,6 +47,8 @@ const Productfilter = () => {
           placeholderTextColor="#999"
           value={search}
           onChangeText={handleSearch}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
         <TouchableOpacity style={styles.filterIcon}>
           <MaterialIcons name="filter-list" size={28} color="#999" />
@@ -95,6 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: '#333',
+    backgroundColor:'yellow'
   },
   filterIcon: {
     marginLeft: 10,
