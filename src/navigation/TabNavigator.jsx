@@ -1,12 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ProfileScreen from './Profile.screen';
-import CartScreen from './Cart.screen';
-import FavoriteScreen from './Favorite.screen';
-import AccountScreen from './Account.screen';
+import ProfileScreen from '../screen/Profile.screen';
+import CartScreen from '../screen/Cart.screen';
+import FavoriteScreen from '../screen/Favorite.screen';
+import AccountScreen from '../screen/Account.screen';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import HomeScreen from './Home.screen';
+import Entypo from 'react-native-vector-icons/Entypo'
+import HomeScreen from '../screen/Home.screen';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,7 @@ const TabNavigator = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="manage-search" size={size} color={color} />
+            <Entypo name="shop" size={size} color={color} />
           ),
         }}
       />

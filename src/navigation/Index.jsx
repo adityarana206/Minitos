@@ -8,7 +8,7 @@ import Signinscreen from '../screen/Signin.screen';
 import OTPScreen from '../screen/Otp.screen';
 import SelectLocation from '../screen/SelectLocation.screen';
 import HomeScreen from '../screen/Home.screen';
-import TabNavigator from '../screen/TabNavigator';
+import TabNavigator from './TabNavigator';
 
 const Stack = createNativeStackNavigator();
 

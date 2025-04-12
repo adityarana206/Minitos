@@ -1,42 +1,7 @@
-import React, { useState } from 'react';
-import {
-  View,
-  TextInput,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-// Get screen width and height for responsiveness
-const { width, height } = Dimensions.get('window');
-
-const PRODUCT_LIST = [
-  { name: 'Fruits', image: 'https://via.placeholder.com/100x100?text=Fruits' },
-  { name: 'Vegetables', image: 'https://via.placeholder.com/100x100?text=Vegetables' },
-  { name: 'Dairy', image: 'https://via.placeholder.com/100x100?text=Dairy' },
-  { name: 'Bakery', image: 'https://via.placeholder.com/100x100?text=Bakery' },
-  { name: 'Beverages', image: 'https://via.placeholder.com/100x100?text=Beverages' },
-  { name: 'Snacks', image: 'https://via.placeholder.com/100x100?text=Snacks' },
-  { name: 'Frozen', image: 'https://via.placeholder.com/100x100?text=Frozen' },
-];
-
 const Productfilter = () => {
   const [search, setSearch] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [filteredList, setFilteredList] = useState(PRODUCT_LIST);
-
-  const handleSearch = (text) => {
-    setSearch(text);
-    const filtered = PRODUCT_LIST.filter(item =>
-      item.name.toLowerCase().includes(text.toLowerCase())
-    );
-    setFilteredList(filtered);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -98,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: '#333',
-    backgroundColor:'yellow'
+    backgroundColor: 'yellow'
   },
   filterIcon: {
     marginLeft: 10,
@@ -117,7 +82,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     alignItems: 'center',
     elevation: 3,
-    position: 'relative', 
+    position: 'relative',
   },
   image: {
     width: width * 0.22, // 22% of screen width
@@ -132,9 +97,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   addToCartIcon: {
-    position: 'absolute', 
-    bottom: 10,         
-    right: 10,           
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
     backgroundColor: '#F26B6B',
     borderRadius: 50,
     padding: 10,
