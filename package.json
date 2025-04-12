@@ -7,10 +7,13 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "reset": "rm -rf node_modules && yarn install && cd ios && rm -rf Pods Podfile.lock build && pod install && cd ..",
+    "android:clean": "cd android && ./gradlew clean && cd .."
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
+    "@react-native-community/checkbox": "^0.5.17",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/native": "^7.1.6",
