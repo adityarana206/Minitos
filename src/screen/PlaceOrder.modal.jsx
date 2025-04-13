@@ -1,8 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions, Modal, StyleSheet, View, Text, TouchableOpacity, FlatList, Image } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const { height, width } = Dimensions.get('screen');
 
 const PlaceOrder = ({ modalVisible, setModalVisible }) => {
+    const navigation = useNavigation();
     const optionDetails = [{
         optionTitle: 'Delivery',
         option: 'Select Method'
@@ -20,7 +22,6 @@ const PlaceOrder = ({ modalVisible, setModalVisible }) => {
         option: '$13.97'
     }
     ]
-
 
     const RenderDetail = ({ item }) => {
         return (<View style={styles.itemView}>
@@ -60,6 +61,20 @@ const PlaceOrder = ({ modalVisible, setModalVisible }) => {
                     data={optionDetails}
                     renderItem={RenderDetail}
                 />
+                <View style={styles.bottomDetails}>
+                    <Text style={styles.discriptionText}>{`By placing an order you agree to our \n`}<Text style={{ color: '#181725' }}>Terms</Text> {`And`} <Text style={{ color: '#181725' }}>Conditions</Text></Text>
+                    <View style={styles.homeOption}>
+                        <Text style={styles.homeOptionText}>Home</Text>
+                        <Text style={styles.homeOptionText}>Profile</Text>
+                    </View>
+                    {/* Place Order  Button */}
+                    <TouchableOpacity style={styles.applyButton} onPress={() => {
+                        setModalVisible(!modalVisible)
+                        navigation.navigate('TrackOrder')
+                    }}>
+                        <Text style={styles.applyText}>Place Order</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </Modal>
     )
@@ -69,7 +84,6 @@ export default PlaceOrder;
 
 const styles = StyleSheet.create({
     container: {
-        height: height * 0.5,
         width: width,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
@@ -125,6 +139,46 @@ const styles = StyleSheet.create({
     card: {
         height: 16,
         width: 22,
-        left:80
-    }
+        left: 80
+    },
+    bottomDetails: {
+        width: width
+    },
+    discriptionText: {
+        fontSize: 14,
+        lineHeight: 21,
+        fontWeight: '600',
+        fontFamily: 'Roboto',
+        color: '#7C7C7C',
+        left: 25,
+        marginTop: 20
+    },
+    homeOption: {
+        width: width * 0.85,
+        height: 30,
+        alignSelf: "center",
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+    },
+    homeOptionText: {
+        fontSize: 14,
+        fontWeight: '400',
+        fontFamily: 'Roboto',
+        color: '#344356',
+    },
+    applyButton: {
+        backgroundColor: '#F26B6B',
+        padding: 15,
+        width: 364,
+        alignSelf: 'center',
+        borderRadius: 16,
+        alignItems: 'center',
+        marginBottom: 50
+    },
+    applyText: {
+        color: '#fff',
+        fontWeight: '600',
+        fontSize: 16,
+    },
 })
