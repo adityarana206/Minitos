@@ -79,12 +79,24 @@ const HomeScreen = () => {
         contentContainerStyle={styles.listContent}
         ListHeaderComponent={
           <>
+            {/* Header */}
+            <View style={styles.headerRow}>
+              <Text style={styles.brandText}>Minitos</Text>
+              <MaterialIcons
+                name="manage-accounts"
+                size={24}
+                color="black"
+              />
+            </View>
+
+            {/* Time */}
+            <View style={styles.time}>
+              <Text style={styles.timeText}>8 Minutes</Text>
+            </View>
+
             {/* Location */}
             <View style={styles.locationWrapper}>
-              <Text style={styles.location}>
-                <Ionicons name="location-sharp" size={20} color="black" />{' '}
-                Location
-              </Text>
+              <Text style={styles.location}>Home-Test Address</Text>
             </View>
 
             {/* Search */}
@@ -173,8 +185,28 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  locationWrapper: {
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 16,
+    marginTop: 10,
+  },
+  brandText: {
+    fontSize: 24,
+    fontWeight: 'normal',
+  },
+  time: {
+    paddingHorizontal: 16,
+    marginTop: 10,
+  },
+  timeText: {
+    fontSize: 30,
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+  },
+  locationWrapper: {
+    paddingHorizontal: 16,
     marginBottom: 20,
   },
   location: {
@@ -187,6 +219,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     alignItems: 'center',
+    marginHorizontal: 16,
   },
   searchIcon: {
     marginRight: 8,
