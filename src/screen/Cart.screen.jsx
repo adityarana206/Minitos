@@ -84,20 +84,23 @@ const CartScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.innerContainer}>
+      {/* <View style={styles.innerContainer}>
         <Text style={styles.findProduct}>My Cart</Text>
-      </View>
-      <Text style={styles.totalAmount}>Order Total:  3000/-</Text>
+      </View> */}
       <FlatList
         showsVerticalScrollIndicator={false}
         data={cartData}
         renderItem={renderCartProduct}
       />
       {/* Apply Filter Button */}
+      <Text style={styles.totalAmount}>Order Total:  3000/-</Text>
+
       <TouchableOpacity style={styles.applyButton} onPress={() => setPlaceOrder(true)}>
+        
         <Text style={styles.applyText}>Go to Checkout</Text>
       </TouchableOpacity>
       <PlaceOrder modalVisible={placeOrder} setModalVisible={setPlaceOrder} />
+
     </SafeAreaView>
   );
 };
@@ -215,3 +218,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 })
+

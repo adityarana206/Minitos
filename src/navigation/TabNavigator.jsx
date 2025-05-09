@@ -1,21 +1,24 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ProfileScreen from '../screen/Profile.screen';
-import CartScreen from '../screen/Cart.screen';
 import FavoriteScreen from '../screen/Favorite.screen';
 import AccountScreen from '../screen/Account.screen';
+import HomeScreen from '../screen/Home.screen';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Entypo from 'react-native-vector-icons/Entypo'
-import HomeScreen from '../screen/Home.screen';
+import Entypo from 'react-native-vector-icons/Entypo';
+import { useNavigation } from '@react-navigation/native';
+import CartScreen from '../screen/Cart.screen';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const navigation = useNavigation();
+
   return (
     <Tab.Navigator
       initialRouteName='Shop'
-      component={HomeScreen}
       screenOptions={{
         tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'black',
@@ -46,17 +49,24 @@ const TabNavigator = () => {
         }}
       />
 
+      {/* Cart tab overridden to navigate manually */}
       <Tab.Screen
-        name="Cart"
-        component={CartScreen}
+        name="Cart" // pseudo tab, not the actual screen name
+        component={() => null}
         options={{
-          headerShown: false,
-          
+          headerShown :false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="shopping-cart" size={size} color={color} />
           ),
+          tabBarButton: (props) => (
+            <TouchableOpacity
+              {...props}
+              onPress={() => navigation.navigate('CartScreen')} // Make sure CartScreen is in your stack navigator
+            />
+          ),
         }}
       />
+
       <Tab.Screen
         name="Favorite"
         component={FavoriteScreen}
