@@ -85,7 +85,9 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="person" size={size} color={color} />
           ),
+         
         }}
+        
       />
     </Tab.Navigator>
   );
