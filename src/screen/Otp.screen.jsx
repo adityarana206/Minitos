@@ -1,13 +1,18 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Dimensions, Image, Platform, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard, ScrollView } from "react-native";
+import { Dimensions, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard, ScrollView, Alert } from "react-native";
 import Header from "../atoms/Header.common";
+import { handleOtp, reSendOtp, sendOtp, verifyOtp } from "../network/APIHandling";
+import { useRoute } from '@react-navigation/native';
 const { width, height } = Dimensions.get('screen');
-
 
 const OTPScreen = () => {
     const navigation = useNavigation();
+    const route = useRoute();
+    const phoneNumber = route?.params?.phoneNumber || '';
     const [keyboardStatus, setKeyboardStatus] = useState('closed');
+    const [loading, setLoading] = useState(false);
+    const [otp, setOtp] = useState('');
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -28,24 +33,84 @@ const OTPScreen = () => {
         };
     }, []);
 
+    const handleSendOtp = async () => {
+        if (loading) return;
+        setLoading(true);
+        try {
+            const result = await handleOtp(phoneNumber, '/auth/send-otp');
+        } catch (e) {
+            if (e.response?.status === 429) {
+                Alert.alert('Too Many Requests', 'Please wait before requesting another OTP.');
+            } else {
+                Alert.alert('Error', 'Failed to send OTP. Try again.');
+            }
+            console.error('Failed to send OTP', e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleReSendOtp = async () => {
+        if (loading) return;
+        setLoading(true);
+        try {
+            const result = await handleOtp(phoneNumber, '/auth/resend-otp');
+        } catch (e) {
+            if (e.response?.status === 429) {
+                Alert.alert('Too Many Re-Send Requests', 'Please wait before requesting another OTP.');
+            } else {
+                Alert.alert('Error', 'Failed to re-send OTP. Try again.');
+            }
+            console.error('Failed to re-send OTP', e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        handleSendOtp();
+    }, [])
+
+    const verifyOTP = async() => {
+        if (!otp || otp.length !== 6) {
+            Alert.alert('Invalid OTP', 'Please enter the 6-digit OTP.');
+            return;
+        }
+        setLoading(true);
+        try {
+            const result = await verifyOtp(phoneNumber, otp);
+            console.log('OTP Verified:', result);
+            // Navigate or store token based on result
+            navigation.navigate('SelectLocation');
+          } catch (e) {
+            Alert.alert('Verification Failed', 'Invalid OTP or server error.');
+            console.error('OTP verification failed:', e);
+          } finally {
+            setLoading(false);
+          }
+    }
 
     return (<SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-            <Header/>
+            <Header />
             <View style={styles.midView}>
                 <Text style={styles.textStyle}>Enter your 4-digit code</Text>
                 <Text style={styles.codeStyle}>Code</Text>
                 <View style={styles.inputView}>
                     <TextInput
-                        placeholder={'- - - -'}
+                        maxLength={6}
+                        placeholder={'- - - - - -'}
                         placeholderTextColor={'#000'}
                         style={styles.inputText}
+                        keyboardType="number-pad"
+                        value={otp}
+                        onChangeText={setOtp}
                     />
                 </View>
             </View>
             <View style={styles.bottomView}>
-                <Text style={styles.resendText}>Resend Code</Text>
-                <TouchableOpacity style={styles.proceedBtn} activeOpacity={0.6} onPress={() => navigation.navigate('SelectLocation')}>
+                <Text style={[styles.resendText, loading && { opacity: 0.5 }]} onPress={!loading ? handleReSendOtp : undefined}>Resend Code</Text>
+                <TouchableOpacity style={styles.proceedBtn} activeOpacity={0.6} onPress={verifyOTP}>
                     <Image source={require('../assets/RightArrow.png')} style={styles.backBtn} resizeMode={'contain'} />
                 </TouchableOpacity>
             </View>
